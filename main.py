@@ -17,3 +17,7 @@ def create_data():
 @app.put("/")
 def update_data():
     return {"message": "Data updated", "data": "Updated data"}
+
+@app.delete("/")
+def delete_data():
+    return {"message": "Data deleted"}
