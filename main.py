@@ -13,3 +13,7 @@ def get_data():
 @app.post("/")
 def create_data():
     return {"message": "Data created", "data": "Data"}
+
+@app.put("/")
+def update_data():
+    return {"message": "Data updated", "data": "Updated data"}
