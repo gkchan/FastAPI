@@ -9,3 +9,7 @@ app = FastAPI()
 @app.get("/")
 def get_data():
     return {"message": "Sample data"}
+
+@app.post("/")
+def create_data():
+    return {"message": "Data created", "data": "Data"}
