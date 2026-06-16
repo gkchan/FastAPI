@@ -1,2 +1,5 @@
 [project]
 name = "fastapi"
+
+[tool.fastapi]
+entrypoint = "main:app"
