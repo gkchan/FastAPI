@@ -5,3 +5,7 @@ from fastapi import FastAPI
 # prod: fastapi run
 
 app = FastAPI()
+
+@app.get("/")
+def get_data():
+    return {"message": "Sample data"}
