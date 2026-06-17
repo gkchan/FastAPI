@@ -21,3 +21,7 @@ def update_data():
 @app.delete("/")
 def delete_data():
     return {"message": "Data deleted"}
+
+@app.get("/data/{id}")
+def get_data_by_id(id: int):
+    return {"message": f"Data for ID {id}", "id": id}
