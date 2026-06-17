@@ -25,3 +25,8 @@ def delete_data():
 @app.get("/data/{id}")
 def get_data_by_id(id: int):
     return {"message": f"Data for ID {id}", "id": id}
+
+@app.get("/data")
+def get_partial_data(skip: int = 0, limit: int = 5):
+    data_ids = range(skip, skip + limit)
+    return {"message": "Get partial data ids", "skip": skip, "limit": limit, "data_ids": data_ids}  
