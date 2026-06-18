@@ -35,6 +35,10 @@ def get_partial_data(skip: int = 0, limit: int = 5):
     data_ids = list(range(skip, skip + limit))
     return {"message": "Get partial data ids", "skip": skip, "limit": limit, "data_ids": data_ids}  
 
+@app.get("/num")
+def get_num(num: int):
+    return {"message": f"Get data for num: {num}", "num": num}
+
 @app.get("/nums")
 def get_filtered_nums(min_num: int = 0):
     nums = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
