@@ -6,6 +6,9 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+# TO DO: endpoint testing/error handling
+# Optional: React UI
+
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
 
