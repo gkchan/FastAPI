@@ -28,5 +28,5 @@ def get_data_by_id(id: int):
 
 @app.get("/data")
 def get_partial_data(skip: int = 0, limit: int = 5):
-    data_ids = range(skip, skip + limit)
+    data_ids = list(range(skip, skip + limit))
     return {"message": "Get partial data ids", "skip": skip, "limit": limit, "data_ids": data_ids}  
