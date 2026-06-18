@@ -6,6 +6,9 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+# _______________________________________________________________________________
+# CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
+
 @app.get("/")
 def get_data():
     return {"message": "Sample data"}
@@ -21,6 +24,7 @@ def update_data():
 @app.delete("/")
 def delete_data():
     return {"message": "Data deleted"}
+# _______________________________________________________________________________
 
 @app.get("/data/{id}")
 def get_data_by_id(id: int):
