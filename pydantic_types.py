@@ -9,3 +9,6 @@ class Item(BaseModel):
     item_id: int
     name: str
     description: str | None = None
+
+class NumRequest(BaseModel):
+    num: int
