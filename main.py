@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic_types import NumRequest
 
 # Commands to start the server
 # dev: fastapi dev
@@ -41,6 +42,10 @@ def get_partial_data(skip: int = 0, limit: int = 5):
 @app.get("/num")
 def get_num(num: int):
     return {"message": f"Get data for num: {num}", "num": num}
+
+@app.get("/num2")
+def get_num_with_request_model(num_info: NumRequest = {"num": 0}):
+    return {"message": "Get num request data", "num_request": num_info}
 
 @app.get("/nums")
 def get_filtered_nums(min_num: int = 0):

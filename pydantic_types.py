@@ -11,4 +11,4 @@ class Item(BaseModel):
     description: str | None = None
 
 class NumRequest(BaseModel):
-    num: int
+    num: int = 0
