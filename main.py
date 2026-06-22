@@ -47,6 +47,10 @@ def get_num(num: int):
 def get_num_with_request_model(num_info: NumRequest = {"num": 0}):
     return {"message": "Get num request data", "num_request": num_info}
 
+@app.get("/num3")
+def get_num_with_model_dump(num_request: NumRequest):
+    return {"message": "Get num request data", "num_request_dict": num_request.model_dump()}
+
 @app.get("/nums")
 def get_filtered_nums(min_num: int = 0):
     nums = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
