@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from pydantic_types import NumRequest
 
 # Commands to start the server
@@ -9,6 +9,10 @@ app = FastAPI()
 
 # TO DO: endpoint testing/error handling
 # Optional: React UI
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def do_health_check():
+    return {"status": "healthy", "message": "Service is running"}
 
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
