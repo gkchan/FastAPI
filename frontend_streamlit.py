@@ -1,6 +1,21 @@
+import requests
 import streamlit as st
 
 # Command to start the server: streamlit run frontend_streamlit.py 
 # URL to view the frontend: http://localhost:8501
 
 st.title("FastAPI Streamlit Frontend")
+
+if st.button('Check health'):
+    st.write("Checking health...")
+    backend_url = "http://localhost:8000/health"
+    try:
+        response = requests.get(backend_url)
+        if response.status_code == 200:
+            st.success("Service is healthy!")
+        else:
+            st.error(f"Service is not healthy. Status code: {response.status_code}")
+        st.write(response.json())
+    except requests.RequestException as e:
+        st.error(f"Error occurred while checking health: {e}")
+    
