@@ -7,15 +7,14 @@ import streamlit as st
 st.title("FastAPI Streamlit Frontend")
 
 if st.button('Check health'):
-    st.write("Checking health...")
-    backend_url = "http://localhost:8000/health"
-    try:
-        response = requests.get(backend_url)
-        if response.status_code == 200:
-            st.success("Service is healthy!")
-        else:
-            st.error(f"Service is not healthy. Status code: {response.status_code}")
-        st.write(response.json())
-    except requests.RequestException as e:
-        st.error(f"Error occurred while checking health: {e}")
-    
+    with st.spinner('Checking health...'):
+        backend_url = "http://localhost:8000/health"
+        try:
+            response = requests.get(backend_url)
+            if response.status_code == 200:
+                st.success("Service is healthy!")
+            else:
+                st.error(f"Service is not healthy. Status code: {response.status_code}")
+            st.write(response.json())
+        except requests.RequestException as e:
+            st.error(f"Error occurred while checking health: {e}")
