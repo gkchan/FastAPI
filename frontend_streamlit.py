@@ -18,3 +18,5 @@ if st.button('Check health'):
             st.write(response.json())
         except requests.RequestException as e:
             st.error(f"Error occurred while checking health: {e}")
+
+text = st.text_input("Enter text here:")
