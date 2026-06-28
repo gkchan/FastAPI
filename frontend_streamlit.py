@@ -20,3 +20,5 @@ if st.button('Check health'):
             st.error(f"Error occurred while checking health: {e}")
 
 text = st.text_input("Enter text here:")
+
+num = st.number_input("Enter a number:", step=1, value=0)
