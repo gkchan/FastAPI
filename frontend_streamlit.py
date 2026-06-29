@@ -22,3 +22,5 @@ if st.button('Check health'):
 text = st.text_input("Enter text here:")
 
 num = st.number_input("Enter a number:", step=1, value=0)
+
+date = st.date_input("Select a date:")
