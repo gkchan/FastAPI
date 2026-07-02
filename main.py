@@ -1,11 +1,19 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, status
+from database import create_db
 from pydantic_types import NumRequest
 
 # Commands to start the server
 # dev: fastapi dev
 # prod: fastapi run
 
-app = FastAPI()
+# Creates the database tables when the application starts
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db()
+    yield
+
+app = FastAPI(lifespan=lifespan)
 
 # TO DO: endpoint testing/error handling
 # Optional: React UI
