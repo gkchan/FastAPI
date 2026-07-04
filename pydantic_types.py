@@ -13,3 +13,7 @@ class Item(BaseModel):
 
 class NumRequest(BaseModel):
     num: int = 0
+
+class NumResponse(BaseModel):
+    message: str
+    num_request: NumRequest
