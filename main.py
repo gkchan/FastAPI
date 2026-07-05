@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, status
 from database import create_db
-from pydantic_types import NumRequest
+from pydantic_types import NumRequest, NumResponse
 
 # Commands to start the server
 # dev: fastapi dev
@@ -56,7 +56,7 @@ def get_num(num: int):
     return {"message": f"Get data for num: {num}", "num": num}
 
 @app.get("/num2")
-def get_num_with_request_model(num_info: NumRequest = {"num": 0}):
+def get_num_with_request_model(num_info: NumRequest = {"num": 0}, response_model=NumResponse):
     return {"message": "Get num request data", "num_request": num_info}
 
 @app.get("/num3")
