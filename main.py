@@ -1,7 +1,8 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, status
-from database import create_db
+from fastapi import Depends, FastAPI, status
+from database import create_db, get_session
 from pydantic_types import NumRequest, NumResponse
+from models import Item
 
 # Commands to start the server
 # dev: fastapi dev
@@ -21,6 +22,13 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/health", status_code=status.HTTP_200_OK)
 async def do_health_check():
     return {"status": "healthy", "message": "Service is running"}
+
+@app.post("/items", response_model=Item)
+def create_item(item: Item, session=Depends(get_session)):
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
 
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
