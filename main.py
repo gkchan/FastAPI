@@ -8,6 +8,8 @@ from models import Item
 # dev: fastapi dev
 # prod: fastapi run
 
+# openapi docs: http://127.0.0.1:8000/docs
+
 # Creates the database tables when the application starts
 @asynccontextmanager
 async def lifespan(app: FastAPI):
