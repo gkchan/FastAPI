@@ -11,3 +11,6 @@ class Item(SQLModel, table=True):
     name: str
     description: Optional[str] = None
     price: float
+
+class NodeBase(SQLModel):
+    value: int
