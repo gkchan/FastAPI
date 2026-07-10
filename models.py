@@ -17,3 +17,6 @@ class NodeBase(SQLModel):
 
 class Node(NodeBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+
+class NodeCreate(NodeBase):
+    pass
