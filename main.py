@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, status
 from database import create_db, get_session
 from pydantic_types import NumRequest, NumResponse
-from models import Item
+from models import Item, Node, NodeCreate
 
 # Commands to start the server
 # dev: fastapi dev
@@ -31,6 +31,14 @@ def create_item(item: Item, session=Depends(get_session)):
     session.commit()
     session.refresh(item)
     return item
+
+@app.post("/nodes", response_model=Node, status_code=status.HTTP_201_CREATED)
+def create_node(node: NodeCreate, session=Depends(get_session)):
+    db_node = Node.model_validate(node)
+    session.add(db_node)
+    session.commit()
+    session.refresh(db_node)
+    return db_node
 
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
