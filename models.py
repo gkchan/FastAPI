@@ -20,3 +20,6 @@ class Node(NodeBase, table=True):
 
 class NodeCreate(NodeBase):
     pass
+
+class NodeRead(NodeBase):
+    id: int
