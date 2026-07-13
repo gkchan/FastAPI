@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from fastapi import Depends, FastAPI, status
+from fastapi import Depends, FastAPI, status, HTTPException
 from database import create_db, get_session
 from pydantic_types import NumRequest, NumResponse
 from models import Item, Node, NodeCreate
@@ -38,6 +38,13 @@ def create_node(node: NodeCreate, session=Depends(get_session)):
     session.add(db_node)
     session.commit()
     session.refresh(db_node)
+    return db_node
+
+@app.get("/nodes/{node_id}", response_model=Node)
+def read_node(node_id: int, session=Depends(get_session)):
+    db_node = session.get(Node, node_id)
+    if not db_node:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Node not found")
     return db_node
 
 # _______________________________________________________________________________
