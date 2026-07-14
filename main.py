@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from typing import List
 from fastapi import Depends, FastAPI, status, HTTPException
 from database import create_db, get_session
 from pydantic_types import NumRequest, NumResponse
@@ -46,6 +47,11 @@ def read_node(node_id: int, session=Depends(get_session)):
     if not db_node:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Node not found")
     return db_node
+
+@app.get("/nodes", response_model=List[Node])
+def read_nodes(skip: int = 0, limit: int = 10, session=Depends(get_session)):
+    nodes = session.query(Node).offset(skip).limit(limit).all()
+    return nodes
 
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
