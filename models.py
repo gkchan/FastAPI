@@ -23,3 +23,6 @@ class NodeCreate(NodeBase):
 
 class NodeRead(NodeBase):
     id: int
+
+class NodeUpdate(SQLModel):
+    value: Optional[int] = None
