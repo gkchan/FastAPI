@@ -3,7 +3,7 @@ from typing import List
 from fastapi import Depends, FastAPI, status, HTTPException
 from database import create_db, get_session
 from pydantic_types import NumRequest, NumResponse
-from models import Item, Node, NodeCreate
+from models import Item, Node, NodeCreate, NodeUpdate
 
 # Commands to start the server
 # dev: fastapi dev
@@ -52,6 +52,17 @@ def read_node(node_id: int, session=Depends(get_session)):
 def read_nodes(skip: int = 0, limit: int = 10, session=Depends(get_session)):
     nodes = session.query(Node).offset(skip).limit(limit).all()
     return nodes
+
+@app.patch("/nodes/{node_id}", response_model=Node)
+def update_node(node_id: int, node_update: NodeUpdate, session=Depends(get_session)):
+    db_node = session.get(Node, node_id)
+    if not db_node:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Node not found")
+    db_node.sqlmodel_update(node_update.model_dump(exclude_unset=True))
+    session.add(db_node)
+    session.commit()
+    session.refresh(db_node)
+    return db_node
 
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
