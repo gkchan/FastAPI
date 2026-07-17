@@ -64,6 +64,15 @@ def update_node(node_id: int, node_update: NodeUpdate, session=Depends(get_sessi
     session.refresh(db_node)
     return db_node
 
+@app.delete("/nodes/{node_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_node(node_id: int, session=Depends(get_session)):
+    db_node = session.get(Node, node_id)
+    if not db_node:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Node not found")
+    session.delete(db_node)
+    session.commit()
+    return None
+
 # _______________________________________________________________________________
 # CRUD endpoints: Will need mock data/database/ORM for meaningful functionality
 
