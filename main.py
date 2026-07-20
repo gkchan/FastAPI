@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from typing import List
 from fastapi import Depends, FastAPI, status, HTTPException
 from database import create_db, get_session
-from pydantic_types import NumRequest, NumResponse
+from pydantic_schemas import NumRequest, NumResponse
 from models import Item, Node, NodeCreate, NodeUpdate
 
 # Commands to start the server
